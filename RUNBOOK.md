@@ -18,7 +18,7 @@ Built 2026-09-12. Verified building and rendering on this machine the same day.
 | `src/pages/Library.tsx` | every held species as a numbered plate; search + sort | ✅ |
 | `src/pages/SpeciesDetail.tsx` | one species: facts + the size × colour "drawer" table | ✅ |
 | `src/pages/FieldGuide.tsx` | checklist by rarity tier, SW Florida vs World, progress rings | ✅ |
-| `.github/workflows/deploy.yml` | GitHub Pages deploy on push to `main` | ✅ repo created 2026-09-12; `configure-pages` enables Pages itself |
+| `.github/workflows/deploy.yml` | GitHub Pages deploy on push to `main` | ✅ runs on push; Pages source must be set to **GitHub Actions** once in repo Settings |
 
 ## Stack
 
@@ -98,10 +98,12 @@ in a 100×120 box, coloured per species. `muted` renders line-art for not-yet-fo
 ## GitHub
 
 Repo created by hand 2026-09-12. `gh` is not installed; pushes go over HTTPS via Git Credential
-Manager (the SSH URL fails — no key on this machine). The workflow calls
-`actions/configure-pages` with `enablement: true`, so Pages did not need to be switched on in
-Settings. If a deploy fails with a Pages permission error, check Settings → Pages → Source is
-**GitHub Actions**. If the repo name changes, change `base` in `vite.config.ts` to match.
+Manager (the SSH URL fails — no key on this machine).
+
+**Pages must be enabled once by hand:** Settings → Pages → Source → **GitHub Actions**. Tried
+`actions/configure-pages` with `enablement: true` on 2026-09-12 and it failed — the workflow
+`GITHUB_TOKEN` cannot create the Pages site. Until the setting is flipped every deploy run fails
+at `deploy-pages` and the site is 404. If the repo name changes, change `base` in `vite.config.ts` to match.
 
 ## Possible next steps
 
