@@ -3,7 +3,8 @@
 "The Shell Cabinet": a museum-styled web app for a Southwest Florida shell collection.
 Built 2026-09-12. Verified building and rendering on this machine the same day.
 
-- **Repo:** https://github.com/JohnDSmall/shell-collection — ⚠️ **not yet created** (see [GitHub](#github))
+- **Repo:** https://github.com/JohnDSmall/shell-collection (HTTPS remote; no SSH key on this machine)
+- **Live:** https://johndsmall.github.io/shell-collection/ — deployed by GitHub Actions on every push to `main`
 - **Local:** `C:\Users\Cameron Corse\projects\shell-collection`
 - **Source of truth for the inventory:** the Google Sheet
   <https://docs.google.com/spreadsheets/d/1qLVgj_1Iiwz-Ud4y5aOK9hyX4hOZ68FYyNwKKvL3xL8/edit>
@@ -17,7 +18,7 @@ Built 2026-09-12. Verified building and rendering on this machine the same day.
 | `src/pages/Library.tsx` | every held species as a numbered plate; search + sort | ✅ |
 | `src/pages/SpeciesDetail.tsx` | one species: facts + the size × colour "drawer" table | ✅ |
 | `src/pages/FieldGuide.tsx` | checklist by rarity tier, SW Florida vs World, progress rings | ✅ |
-| `.github/workflows/deploy.yml` | GitHub Pages deploy on push to `main` | ⚠️ untested — repo not created yet |
+| `.github/workflows/deploy.yml` | GitHub Pages deploy on push to `main` | ✅ repo created 2026-09-12; `configure-pages` enables Pages itself |
 
 ## Stack
 
@@ -96,15 +97,11 @@ in a 100×120 box, coloured per species. `muted` renders line-art for not-yet-fo
 
 ## GitHub
 
-`gh` is not installed and Claude cannot read stored git credentials, so the repo has to be
-created by hand:
-
-1. https://github.com/new → name `shell-collection`, **public** (Pages is free on public repos), no README.
-2. `git remote add origin https://github.com/JohnDSmall/shell-collection.git && git push -u origin main`
-3. Repo → Settings → Pages → Source: **GitHub Actions**. The workflow runs on the push and
-   publishes to https://johndsmall.github.io/shell-collection/.
-
-If the repo name changes, change `base` in `vite.config.ts` to match.
+Repo created by hand 2026-09-12. `gh` is not installed; pushes go over HTTPS via Git Credential
+Manager (the SSH URL fails — no key on this machine). The workflow calls
+`actions/configure-pages` with `enablement: true`, so Pages did not need to be switched on in
+Settings. If a deploy fails with a Pages permission error, check Settings → Pages → Source is
+**GitHub Actions**. If the repo name changes, change `base` in `vite.config.ts` to match.
 
 ## Possible next steps
 
